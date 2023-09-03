@@ -1,8 +1,8 @@
 // Initial game state
 let cells = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
-let result = document.querySelector('.result');
-let buttons = document.querySelectorAll('.cell.btn'); // Corrected selector
+let result = document.querySelector('#result');
+let buttons = document.querySelectorAll('.cell');
 let gameActive = true;
 
 // Winning conditions
@@ -22,18 +22,16 @@ const ticTacToe = (element, index) => {
     if (gameActive && cells[index] === '') {
         cells[index] = currentPlayer;
         element.innerText = currentPlayer;
-        element.value = currentPlayer;  
-        element.disabled = true;
 
         if (checkWin()) {
-            result.innerText = `Player ${currentPlayer} Won🎉`;
+            result.innerText = `Player ${currentPlayer} won`;
             gameActive = false;
         } else if (cells.every(cell => cell !== '')) {
             result.innerText = "It's a draw!";
             gameActive = false;
         } else {
             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            result.innerText = `Player ${currentPlayer} Turn`;
+            result.innerText = `Player ${currentPlayer}'s turn`;
         }
     }
 };
@@ -51,15 +49,15 @@ const resetGame = () => {
     cells = ['', '', '', '', '', '', '', '', ''];
     currentPlayer = 'X';
     gameActive = true;
-    result.innerText = "Player X Turn";
+    result.innerText = "Player X's turn";
 
     buttons.forEach(button => {
         button.innerText = '';
     });
 };
 
-buttons.forEach((button, i) => { // Changed variable name to 'button'
-    button.addEventListener('click', () => ticTacToe(button, i));
+btns.forEach((btn, i) => {
+    btn.addEventListener('click', () => ticTacToe(btn, i));
 });
 
 document.querySelector('#reset').addEventListener('click', resetGame);
