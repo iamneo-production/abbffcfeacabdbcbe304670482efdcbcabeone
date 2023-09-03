@@ -18,13 +18,31 @@ const winPatterns = [
 ];
 
 // Function to handle player moves
+// const ticTacToe = (element, index) => {
+//     if (gameActive && cells[index] === '') {
+//         cells[index] = currentPlayer;
+//         element.innerText = currentPlayer;
+
+//         if (checkWin()) {
+//             result.innerText = `Player ${currentPlayer} won`;
+//             gameActive = false;
+//         } else if (cells.every(cell => cell !== '')) {
+//             result.innerText = "It's a draw!";
+//             gameActive = false;
+//         } else {
+//             currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+//             result.innerText = `Player ${currentPlayer}'s turn`;
+//         }
+//     }
+// };
+
 const ticTacToe = (element, index) => {
     if (gameActive && cells[index] === '') {
         cells[index] = currentPlayer;
         element.innerText = currentPlayer;
 
         if (checkWin()) {
-            result.innerText = `Player ${currentPlayer} won`;
+            result.innerText = `Player ${currentPlayer} won 🎉`;
             gameActive = false;
         } else if (cells.every(cell => cell !== '')) {
             result.innerText = "It's a draw!";
@@ -35,7 +53,6 @@ const ticTacToe = (element, index) => {
         }
     }
 };
-
 // Function to check for winning conditions
 const checkWin = () => {
     return winPatterns.some(pattern => {
