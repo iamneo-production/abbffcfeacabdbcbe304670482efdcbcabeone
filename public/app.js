@@ -2,7 +2,7 @@
 let cells = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
 let result = document.querySelector('.result');
-let buttons = document.querySelectorAll('.cell.btn'); // Corrected selector
+let buttons = document.querySelectorAll('.cell.btn');  
 let gameActive = true;
 
 // Winning conditions
