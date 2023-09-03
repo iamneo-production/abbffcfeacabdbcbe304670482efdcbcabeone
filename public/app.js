@@ -24,7 +24,7 @@ const ticTacToe = (element, index) => {
         element.innerText = currentPlayer;
 
         if (checkWin()) {
-            result.innerText = `${currentPlayer} wins!`;
+            result.innerText = `Player ${currentPlayer} won`;
             gameActive = false;
         } else if (cells.every(cell => cell !== '')) {
             result.innerText = "It's a draw!";
