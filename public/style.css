@@ -74,8 +74,8 @@ h1 {
 /* Reset Button Styling */
 button {
   border: 1px solid #000;
-  color: white;
-  background-color: #000;
+  color: black;
+  background-color: rgba(255, 255, 255, 0.7);
   cursor: pointer;
   margin-top: 20px;
   padding: 10px 20px;
@@ -83,15 +83,15 @@ button {
   font-weight: 600;
 }
 
-button:hover {
+/* button:hover {
   background-color: white;
   color: #000;
   cursor: pointer;
   transition: background-color 0.3s, color 0.3s;
-}
+} */
 
-button:disabled {
+/* button:disabled {
   cursor: no-drop;
   background-color: #ccc;
   color: #888;
-}
+} */
