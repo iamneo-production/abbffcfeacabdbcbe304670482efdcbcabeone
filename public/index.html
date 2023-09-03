@@ -7,9 +7,27 @@
   <title>tic_tac_toe</title>
 
   <!-- link the style.css and app.js files -->
-
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Enter your code here -->
+  <h1>Tic Tac Toe</h1>
+    <div class="game-container">
+        <div class="board">
+            <div class="cell" onclick="makeMove(0)"></div>
+            <div class="cell" onclick="makeMove(1)"></div>
+            <div class="cell" onclick="makeMove(2)"></div>
+            <div class="cell" onclick="makeMove(3)"></div>
+            <div class="cell" onclick="makeMove(4)"></div>
+            <div class="cell" onclick="makeMove(5)"></div>
+            <div class="cell" onclick="makeMove(6)"></div>
+            <div class="cell" onclick="makeMove(7)"></div>
+            <div class="cell" onclick="makeMove(8)"></div>
+        </div>
+        <div id="result-container">
+            <div id="result">Player X's turn</div>
+        </div>
+        <button onclick="resetGame()">Reset</button>
+    </div>
 </body>
 </html>
