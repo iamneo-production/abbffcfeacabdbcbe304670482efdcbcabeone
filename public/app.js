@@ -1,12 +1,8 @@
-// Initial game state
 let cells = ['', '', '', '', '', '', '', '', ''];
 let currentPlayer = 'X';
 let result = document.querySelector('.result');
-let buttons = document.querySelectorAll('.cell.btn'); // Corrected selector
-let gameActive = true;
-
-// Winning conditions
-const winPatterns = [
+let btns = document.querySelectorAll('.btn');
+const winConditions = [
     [0, 1, 2],
     [3, 4, 5],
     [6, 7, 8],
@@ -17,49 +13,50 @@ const winPatterns = [
     [2, 4, 6]
 ];
 
-// Function to handle player moves
-const ticTacToe = (element, index) => {
-    if (gameActive && cells[index] === '') {
-        cells[index] = currentPlayer;
-        element.innerText = currentPlayer;
-        element.value = currentPlayer;  
-        element.disabled = true;
-
-        if (checkWin()) {
-            result.innerText = `Player ${currentPlayer} Won🎉`;
-            gameActive = false;
-        } else if (cells.every(cell => cell !== '')) {
-            result.innerText = "It's a draw!";
-            gameActive = false;
-        } else {
-            currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
-            result.innerText = `Player ${currentPlayer} Turn`;
+function checkWin() {
+    for (let condition of winConditions) {
+        const [a, b, c] = condition;
+        if (cells[a] && cells[a] === cells[b] && cells[b] === cells[c]) {
+            return cells[a];
         }
     }
-};
+    if (!cells.includes('')) {
+        return 'draw';
+    }
+    return null;
+}
 
-// Function to check for winning conditions
-const checkWin = () => {
-    return winPatterns.some(pattern => {
-        const [a, b, c] = pattern;
-        return cells[a] && cells[a] === cells[b] && cells[b] === cells[c];
-    });
-};
+function handleMove(element, index) {
+    if (cells[index] || checkWin()) {
+        return;
+    }
+    cells[index] = currentPlayer;
+    element.value = currentPlayer;
+    element.disabled = true;
+    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+    const winner = checkWin();
+    if (winner === 'draw') {
+        result.innerHTML = 'It\'s a draw!';
+    } else if (winner) {
+        result.innerHTML = `Player ${winner} Won 🎉`;
+        btns.forEach((btn) => btn.disabled = true);
+    } else {
+        result.innerHTML = `Player ${currentPlayer} Turn`;
+    }
+}
 
-// Function to reset the game
-const resetGame = () => {
+function resetGame() {
     cells = ['', '', '', '', '', '', '', '', ''];
-    currentPlayer = 'X';
-    gameActive = true;
-    result.innerText = "Player X Turn";
-
-    buttons.forEach(button => {
-        button.innerText = '';
+    btns.forEach((btn) => {
+        btn.value = '';
+        btn.disabled = false;
     });
-};
-
-buttons.forEach((button, i) => { // Changed variable name to 'button'
-    button.addEventListener('click', () => ticTacToe(button, i));
-});
+    currentPlayer = 'X';
+    result.innerHTML = 'Player X Turn';
+}
 
 document.querySelector('#reset').addEventListener('click', resetGame);
+
+btns.forEach((btn, i) => {
+    btn.addEventListener('click', () => handleMove(btn, i));
+});
